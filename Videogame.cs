@@ -25,12 +25,13 @@ namespace adonet_db_videogame
     //> Creare una classe Videogame da passare come parametro al metodo di inserimento nuovo videogioco e che venga restituita dai metodi di ricerca.
     public class Videogame
     {
-        public int Id { get; set; }
+        public long Id { get; set; }
         public string Name { get; set; }
         public string Overview { get; set; }
+        public DateTime Release_date { get; set; }
         public DateTime CreatedAt { get; set; }
         public DateTime UpdatedAt { get; set; }
-        public int SoftwareHouseId { get; set; }
+        public long SoftwareHouseId { get; set; }
 
         public Videogame()
         {

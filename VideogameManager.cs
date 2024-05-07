@@ -18,13 +18,14 @@ namespace adonet_db_videogame
                 try
                 {
                     connection.Open();
-                    string query = @"INSERT INTO videogames (name, overview, created_at, updated_at, software_house_id)
+                    string query = @"INSERT INTO videogames (name, overview, release_date ,created_at, updated_at, software_house_id)
                                      VALUES (@name, @overview, @created_at, @updated_at, @sh_id)";
 
                     using (SqlCommand cmd = new SqlCommand(query, connection))
                     {
                         cmd.Parameters.AddWithValue("@name", game.Name);
                         cmd.Parameters.AddWithValue("@overview", game.Overview);
+                        cmd.Parameters.AddWithValue("@release_date", game.Release_date);
                         cmd.Parameters.AddWithValue("@created_at", game.CreatedAt);
                         cmd.Parameters.AddWithValue("@updated_at", game.UpdatedAt);
                         cmd.Parameters.AddWithValue("@sh_id", game.SoftwareHouseId);
@@ -42,7 +43,7 @@ namespace adonet_db_videogame
             }
         }
 
-        public static Videogame GetVideogameById(int id)
+        public static Videogame GetVideogameById(long id)
         {
             using (SqlConnection connection = new SqlConnection(STRINGA_DI_CONNESSIONE))
             {
@@ -61,9 +62,12 @@ namespace adonet_db_videogame
                             {
                                 return new Videogame
                                 {
-                                    Id = (int)reader["id"],
+                                   
+
+                                    Id = Convert.ToInt64(reader["id"]),
                                     Name = (string)reader["name"],
                                     Overview = (string)reader["overview"],
+                                    ReleaseDate = (DateTime)reader["release_date"],
                                     CreatedAt = (DateTime)reader["created_at"],
                                     UpdatedAt = (DateTime)reader["updated_at"],
                                     SoftwareHouseId = (int)reader["software_house_id"]
@@ -125,7 +129,7 @@ namespace adonet_db_videogame
             }
         }
 
-        public static void DeleteVideogame(int id)
+        public static void DeleteVideogame(long id)
         {
             using (SqlConnection connection = new SqlConnection(STRINGA_DI_CONNESSIONE))
             {

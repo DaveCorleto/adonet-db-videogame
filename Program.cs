@@ -30,9 +30,9 @@ namespace adonet_db_videogame
                         Console.Write("Descrizione: ");
                         newGame.Overview = Console.ReadLine();
                         Console.Write("ID della software house: ");
-                        if (int.TryParse(Console.ReadLine(), out int shId))
+                        if (long.TryParse(Console.ReadLine(), out long shId))
                         {
-                            newGame.SoftwareHouseId = shId;
+                            newGame.SoftwareHouseId = (int)shId;
                         }
                         VideogameManager.Insert(newGame);
                         break;
@@ -40,7 +40,7 @@ namespace adonet_db_videogame
                     case "2":
                         // Ricercare un videogioco per ID
                         Console.Write("Inserisci l'ID del videogioco da cercare: ");
-                        if (int.TryParse(Console.ReadLine(), out int gameId))
+                        if (long.TryParse(Console.ReadLine(), out long gameId))
                         {
                             Videogame game = VideogameManager.GetVideogameById(gameId);
                             if (game != null)
@@ -76,7 +76,7 @@ namespace adonet_db_videogame
                     case "4":
                         // Cancellare un videogioco per ID
                         Console.Write("Inserisci l'ID del videogioco da cancellare: ");
-                        if (int.TryParse(Console.ReadLine(), out int deleteId))
+                        if (long.TryParse(Console.ReadLine(), out long deleteId))
                         {
                             VideogameManager.DeleteVideogame(deleteId);
                         }
